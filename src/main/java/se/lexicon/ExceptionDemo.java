@@ -30,20 +30,23 @@ public class ExceptionDemo {
     }
 
     public static double takeDecimalInput() {
-        Scanner scanner = new Scanner(System.in);
-        Double input = null;
-        while (true) {
-            try {
-                System.out.println("Enter a Number: ");
-                input = scanner.nextDouble();
-                break;
-            } catch (InputMismatchException e) {
-                scanner.next(); // discard invalid input
-                //e.printStackTrace(); // Debugging: Prints exception details
-                System.out.println("Invalid Input! Please enter a valid decimal number.");
+        try (
+                Scanner scanner = new Scanner(System.in)
+        ) {
+            Double input = null;
+            while (true) {
+                try {
+                    System.out.println("Enter a Number: ");
+                    input = scanner.nextDouble();
+                    break;
+                } catch (InputMismatchException e) {
+                    scanner.next(); // discard invalid input
+                    //e.printStackTrace(); // Debugging: Prints exception details
+                    System.out.println("Invalid Input! Please enter a valid decimal number.");
+                }
             }
+            return input;
         }
-        return input;
     }
 
 
